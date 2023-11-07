@@ -20,7 +20,6 @@
             style="width: 160px"
           >
             <input
-              id="find-dev"
               type="submit"
               class="submit-button bg-transparent opacity-50"
               value="Find"
@@ -182,10 +181,12 @@ export default {
   src: url("~@/assets/fonts/Montserrat-VariableFont_wght.ttf")
     format("truetype");
 }
+/**/
 ul {
   list-style: none;
 }
 
+/*default avatar*/
 .circle {
   background-color: #cccccc;
   width: 125px;
@@ -219,9 +220,59 @@ ul {
   font-size: 30px;
 }
 
-#find-dev:hover {
+.search-field {
+  background-color: transparent;
+  border: none;
+  color: white;
+  opacity: 50%;
+  padding-left: 1rem;
 }
 
+.gradient-border-mask {
+  height: 30px;
+  position: relative;
+  padding: 1px;
+}
+
+.gradient-border-mask::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50px;
+  border: 2px solid transparent;
+  background: linear-gradient(45deg, white, transparent) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+}
+
+.gradient-border-mask-right {
+  background: linear-gradient(
+    232deg,
+    rgba(4, 90, 64, 0.4) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  position: relative;
+  padding: 1px;
+}
+
+.gradient-border-mask-right::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50px;
+  border: 2px solid transparent;
+  background: linear-gradient(-135deg, white, transparent) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+}
+
+/* desktop view*/
 @media (min-width: 501px) {
   #app {
     width: 100%;
@@ -267,7 +318,7 @@ ul {
     padding: 50px;
     align-content: center;
   }
-  
+
   .join-date {
     display: inline-block;
     align-self: end;
@@ -281,7 +332,7 @@ ul {
     padding-right: 20px;
   }
 }
-
+/* phone view*/
 @media (max-width: 500px) {
   #app {
     width: 100%;
@@ -313,7 +364,6 @@ ul {
     flex-direction: column;
   }
   .stats {
-    font-size: 10px;
     display: inline-block;
     margin-right: 10px;
     text-align: center;
@@ -341,59 +391,5 @@ ul {
     bottom: 0;
     margin-bottom: 50px;
   }
-}
-
-.search-field {
-  background-color: transparent;
-  border: none;
-  color: white;
-  opacity: 50%;
-  padding-left: 1rem;
-}
-
-.gradient-border-mask {
-  height: 30px;
-  position: relative;
-  padding: 1px;
-}
-
-.gradient-border-mask::before {
-  content: "";
-  position: absolute;
-  max-height: 30px;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 50px;
-  border: 2px solid transparent;
-  background: linear-gradient(45deg, white, transparent) border-box;
-  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-}
-
-.gradient-border-mask-right {
-  background: linear-gradient(
-    232deg,
-    rgba(4, 90, 64, 0.4) 0%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  max-height: initial;
-  position: relative;
-  padding: 1px;
-}
-
-.gradient-border-mask-right::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 50px;
-  border: 2px solid transparent;
-  background: linear-gradient(-135deg, white, transparent) border-box;
-  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-  mask-composite: exclude;
 }
 </style>
