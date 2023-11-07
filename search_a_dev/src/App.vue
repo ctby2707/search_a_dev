@@ -42,9 +42,9 @@
                 <div v-else class="circle"></div>
               </div>
               <h2 class="fw-bold size">
-                {{ user.name ? user.name : "The Octocat" }}
+                {{ user.name ? user.name : "Lorem ipsum" }}
               </h2>
-              <p>@{{ user.login ? user.login : "" }}</p>
+              <p>@{{ user.login ? user.login : "lorem" }}</p>
             </div>
             <ul class="list-padding">
               <li class="mb-4 d-flex justify-content-start align-items-center">
@@ -60,19 +60,19 @@
               <li class="mb-4 d-flex justify-content-start align-items-center">
                 <Icon icon="maki:suitcase" width="25" />
                 <div class="ms-2">
-                  {{ user.company ? user.company : "@github" }}
+                  {{ user.company ? user.company : "Not available" }}
                 </div>
               </li>
               <li class="mb-4 d-flex justify-content-start align-items-center">
                 <Icon icon="material-symbols:link" width="25" />
                 <div class="ms-2">
-                  {{ user.blog ? user.blog : "https://github.blog" }}
+                  {{ user.blog ? user.blog : "Not available" }}
                 </div>
               </li>
               <li class="mb-4 d-flex justify-content-start align-items-center">
                 <Icon icon="material-symbols:home" width="25" />
                 <div class="ms-2">
-                  {{ user.location ? user.location : "San Francisco" }}
+                  {{ user.location ? user.location : "Not mentionned" }}
                 </div>
               </li>
             </ul>
@@ -110,7 +110,7 @@
                 {{
                   user.created_at
                     ? formatDate(user.created_at)
-                    : "25 January 2011"
+                    : "1 January 2000"
                 }}
               </p>
             </div>
@@ -225,7 +225,7 @@ ul {
 @media (min-width: 501px) {
   #app {
     width: 100%;
-    height: 100%;
+    height: 100rem;
     background: linear-gradient(121deg, #045a40 0%, #043b5a 36.51%);
     font-family: "montserrat";
     padding-top: 60px;
@@ -267,6 +267,7 @@ ul {
     padding: 50px;
     align-content: center;
   }
+  
   .join-date {
     display: inline-block;
     align-self: end;
