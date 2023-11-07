@@ -1,8 +1,8 @@
 <template>
   <div class="container d-flex flex-column align-items-center">
-    <div class="flex-row">
-      <div class="flex-column">
-        <h1 class="title">Dev Finder</h1>
+    <div class="custom-flex">
+      <div class="flex-column flex-width">
+        <h1 class="title right-align">Dev Finder</h1>
         <form class="d-flex flex-column align-items-end">
           <div class="gradient-border-mask mb-4 w-75">
             <input
@@ -24,39 +24,42 @@
           </div>
         </form>
       </div>
-      <div>
-        <div
-          class="flex-row ms-5 text-white gradient-border-mask-right"
-          style="max-width: 89%"
-        >
-          <div class="p-5 flex-column">
-            <div>
-              <img src="@/assets/logo.png" />
+      <div class="align-center">
+        <div class="custom-flex text-white gradient-border-mask-right">
+          <div class="custom-padding flex-column">
+            <div class="align-center">
+              <div class="d-flex flex-column align-items-center mb-3">
+                <img
+                  src="@/assets/logo.png"
+                  class="rounded-circle"
+                  width="125"
+                />
+              </div>
+              <h2 class="fw-bold">The octocat</h2>
+              <p>@octocat</p>
             </div>
-            <h2 class="fw-bold">The octocat</h2>
-            <p>@octocat</p>
             <ul>
               <li class="mb-4 d-flex justify-content-start align-items-center">
-                <Icon icon="basil:twitter-outline" />
+                <Icon icon="basil:twitter-outline" width="25" />
                 <div class="ms-2">Not available</div>
               </li>
               <li class="mb-4 d-flex justify-content-start align-items-center">
-                <Icon icon="maki:suitcase" />
+                <Icon icon="maki:suitcase" width="25" />
                 <div class="ms-2">@github</div>
               </li>
               <li class="mb-4 d-flex justify-content-start align-items-center">
-                <Icon icon="material-symbols:link" />
+                <Icon icon="material-symbols:link" width="25" />
                 <div class="ms-2">https://github.blog</div>
               </li>
               <li class="mb-4 d-flex justify-content-start align-items-center">
-                <Icon icon="material-symbols:home" />
+                <Icon icon="material-symbols:home" width="25" />
                 <div class="ms-2">San Francisco</div>
               </li>
             </ul>
           </div>
-          <div class="p-5 flex-column">
+          <div class="custom-padding flex-column">
             <div class="flex-row mt-5">
-              <ul>
+              <ul class="">
                 <li class="stats">
                   <strong>8</strong>
                   <p>Repos</p>
@@ -76,10 +79,8 @@
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
-            <div
-              class="align-self-end position-absolute bottom-0 mb-5"
-            >
-              <p>Joined on</p>
+            <div class="join-date">
+              <p class="mb-0">Joined on</p>
               <p>25 January 2011</p>
             </div>
           </div>
@@ -114,13 +115,6 @@ ul {
   list-style: none;
 }
 
-
-.stats {
-  display: inline-block;
-  margin-right: 40px;
-  text-align: center;
-}
-
 .flex-row {
   display: flex;
   flex-direction: row;
@@ -147,22 +141,120 @@ ul {
 #find-dev:hover {
 }
 
-.radial-gradient {
-  height: 56px;
-  width: 82%;
-  background: radial-gradient(
-    50% 50% at 51.62% 50%,
-    rgba(0, 0, 0, 0.4) 0%,
-    rgba(0, 0, 0, 0) 100%
-  );
+@media (min-width: 501px) {
+  #app {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(121deg, #045a40 0%, #043b5a 36.51%);
+    font-family: "montserrat";
+    padding-top: 60px;
+  }
+  .flex-width {
+    min-width: 35%;
+  }
+  .radial-gradient {
+    height: 56px;
+    width: 82%;
+    background: radial-gradient(
+      50% 50% at 51.62% 50%,
+      rgba(0, 0, 0, 0.4) 0%,
+      rgba(0, 0, 0, 0) 100%
+    );
+  }
+  .right-align {
+    text-align: end;
+  }
+  .title {
+    text-align: end;
+    max-width: 400px;
+    font-family: trykker;
+    font-size: 80px;
+    color: white;
+    margin-bottom: 100px;
+  }
+  .custom-flex {
+    display: flex;
+    flex-direction: row;
+    margin-left: 50px;
+  }
+  .stats {
+    display: inline-block;
+    margin-right: 20px;
+    text-align: center;
+  }
+  .custom-padding {
+    padding: 50px;
+    align-content: center;
+  }
+  .join-date {
+    display: inline-block;
+    align-self: end;
+    text-align: end;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 50px;
+  }
 }
 
-.title {
-  text-align: right;
-  width: 442px;
-  font-family: trykker;
-  font-size: 100px;
-  color: white;
+@media (max-width: 500px) {
+  #app {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(121deg, #045a40 0%, #043b5a 36.51%);
+    font-family: "montserrat";
+    padding-top: 40px;
+    padding-left: 2%;
+    padding-right: 2%;
+    font-size: small;
+  }
+  form {
+    padding-bottom: 40px;
+  }
+
+  .radial-gradient {
+    visibility: hidden;
+  }
+  .title {
+    text-align: right;
+    width: 100px;
+    font-family: trykker;
+    font-size: large;
+    color: white;
+    margin-bottom: 40px;
+  }
+  .custom-flex {
+    display: flex;
+    flex-direction: column;
+  }
+  .stats {
+    font-size: 10px;
+    display: inline-block;
+    margin-right: 10px;
+    text-align: center;
+  }
+
+  .align-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .stat-list {
+    padding-left: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .custom-padding {
+    padding: 10px;
+  }
+  .join-date {
+    display: inline-block;
+    align-self: center;
+    text-align: center;
+    bottom: 0;
+    margin-bottom: 50px;
+  }
 }
 
 .search-field {
@@ -195,7 +287,12 @@ ul {
 }
 
 .gradient-border-mask-right {
-  max-width: 100%;
+  background: linear-gradient(
+    232deg,
+    rgba(4, 90, 64, 0.4) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  max-height: initial;
   position: relative;
   padding: 1px;
 }
@@ -212,13 +309,5 @@ ul {
   background: linear-gradient(-135deg, white, transparent) border-box;
   -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
-}
-
-#app {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(121deg, #045a40 0%, #043b5a 36.51%);
-  font-family: "montserrat";
-  padding-top: 60px;
 }
 </style>
