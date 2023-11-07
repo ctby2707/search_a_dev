@@ -3,9 +3,13 @@
     <div class="custom-flex">
       <div class="flex-column flex-width">
         <h1 class="title right-align">Dev Finder</h1>
-        <form class="d-flex flex-column align-items-end">
+        <form
+          class="d-flex flex-column align-items-end"
+          @submit.prevent="getData"
+        >
           <div class="gradient-border-mask mb-4 w-75">
             <input
+              v-model="pseudo"
               class="search-field w-100"
               type="text"
               placeholder="Search Github"
@@ -18,7 +22,7 @@
             <input
               id="find-dev"
               type="submit"
-              class="submit-button bg-transparent"
+              class="submit-button bg-transparent opacity-50"
               value="Find"
             />
           </div>
@@ -30,30 +34,46 @@
             <div class="align-center">
               <div class="d-flex flex-column align-items-center mb-3">
                 <img
-                  src="@/assets/logo.png"
+                  v-if="user.avatar_url"
+                  :src="user.avatar_url"
                   class="rounded-circle"
                   width="125"
                 />
+                <div v-else class="circle"></div>
               </div>
-              <h2 class="fw-bold">The octocat</h2>
-              <p>@octocat</p>
+              <h2 class="fw-bold size">
+                {{ user.name ? user.name : "The Octocat" }}
+              </h2>
+              <p>@{{ user.login ? user.login : "" }}</p>
             </div>
-            <ul>
+            <ul class="list-padding">
               <li class="mb-4 d-flex justify-content-start align-items-center">
                 <Icon icon="basil:twitter-outline" width="25" />
-                <div class="ms-2">Not available</div>
+                <div class="ms-2">
+                  {{
+                    user.twitter_username
+                      ? user.twitter_username
+                      : "Not available"
+                  }}
+                </div>
               </li>
               <li class="mb-4 d-flex justify-content-start align-items-center">
                 <Icon icon="maki:suitcase" width="25" />
-                <div class="ms-2">@github</div>
+                <div class="ms-2">
+                  {{ user.company ? user.company : "@github" }}
+                </div>
               </li>
               <li class="mb-4 d-flex justify-content-start align-items-center">
                 <Icon icon="material-symbols:link" width="25" />
-                <div class="ms-2">https://github.blog</div>
+                <div class="ms-2">
+                  {{ user.blog ? user.blog : "https://github.blog" }}
+                </div>
               </li>
               <li class="mb-4 d-flex justify-content-start align-items-center">
                 <Icon icon="material-symbols:home" width="25" />
-                <div class="ms-2">San Francisco</div>
+                <div class="ms-2">
+                  {{ user.location ? user.location : "San Francisco" }}
+                </div>
               </li>
             </ul>
           </div>
@@ -61,27 +81,38 @@
             <div class="flex-row mt-5">
               <ul class="">
                 <li class="stats">
-                  <strong>8</strong>
+                  <strong>{{
+                    user.public_repos ? user.public_repos : "0"
+                  }}</strong>
                   <p>Repos</p>
                 </li>
                 <li class="stats">
-                  <strong>7665</strong>
+                  <strong>{{ user.followers ? user.followers : "0" }}</strong>
                   <p>Followers</p>
                 </li>
                 <li class="stats">
-                  <strong>9</strong>
+                  <strong>{{ user.following ? user.following : "0" }}</strong>
                   <p>Following</p>
                 </li>
               </ul>
             </div>
             <p class="mt-4">Biography</p>
             <p class="fw-bold" style="text-align: justify">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              {{
+                user.bio
+                  ? user.bio
+                  : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua."
+              }}
             </p>
             <div class="join-date">
               <p class="mb-0">Joined on</p>
-              <p>25 January 2011</p>
+              <p>
+                {{
+                  user.created_at
+                    ? formatDate(user.created_at)
+                    : "25 January 2011"
+                }}
+              </p>
             </div>
           </div>
         </div>
@@ -93,10 +124,50 @@
 
 <script>
 import { Icon } from "@iconify/vue";
+import axios from "axios";
 export default {
   name: "App",
   components: {
     Icon,
+  },
+  data() {
+    return { user: {}, pseudo: "" };
+  },
+  methods: {
+    async getData() {
+      try {
+        const response = await axios.get(
+          "https://api.github.com/users/" + this.pseudo
+        );
+        this.user = response.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    formatDate(inputDate) {
+      const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+
+      const date = new Date(inputDate);
+      const day = date.getDate();
+      const month = months[date.getMonth()];
+      const year = date.getFullYear();
+
+      return `${day} ${month} ${year}`;
+    },
   },
 };
 </script>
@@ -113,6 +184,13 @@ export default {
 }
 ul {
   list-style: none;
+}
+
+.circle {
+  background-color: #cccccc;
+  width: 125px;
+  height: 125px;
+  border-radius: 50%;
 }
 
 .flex-row {
@@ -136,6 +214,9 @@ ul {
     rgba(4, 90, 64, 0.4) 0%,
     rgba(255, 255, 255, 0) 100%
   );
+}
+.size {
+  font-size: 30px;
 }
 
 #find-dev:hover {
@@ -193,6 +274,10 @@ ul {
     position: absolute;
     bottom: 0;
     margin-bottom: 50px;
+  }
+  .list-padding {
+    padding-left: 0;
+    padding-right: 20px;
   }
 }
 
